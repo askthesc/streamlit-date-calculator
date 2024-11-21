@@ -39,9 +39,9 @@ if end_date >= start_date:
         st.write(f"Start Date: **{start_date.strftime('%Y-%m-%d')}**")
         st.write(f"End Date: **{end_date.strftime('%Y-%m-%d')}**")
         st.write(f"Include Start and End Date: **{'Yes' if include_dates else 'No'}**")
-        st.success(f"Total Business Days (Excluding weekends): **{total_biz_years}**")
-        st.success(f"Total Business Months (Excluding weekends): **{total_biz_months}**")
-        st.success(f"Total Business Years (Excluding weekends): **{total_business_days}**")
+        st.success(f"Total Business Days (Excluding weekends): **{total_biz_years:.1f}**")
+        st.success(f"Total Business Months (Excluding weekends): **{total_biz_months:.1f}**")
+        st.success(f"Total Business Years (Excluding weekends): **{total_business_days:.1f}**")
     else:
         # Calculate total days
         total_days = (end_date - start_date).days
