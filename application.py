@@ -21,11 +21,13 @@ if end_date >= start_date:
     if business_days_only:
         # Generate a range of business days
         date_range = pd.date_range(start=start_date, end=end_date, freq=BDay())
-        total_business_days = len(date_range)
 
         # Adjust for inclusivity
         if not include_dates:
-            total_business_days -= 1  # Exclude the end date if "Include Both" is unchecked
+            # Exclude the start and end dates explicitly
+            date_range = date_range[1:-1]
+
+        total_business_days = len(date_range)
 
         # Display results for business days
         st.write(f"Start Date: {start_date}")
