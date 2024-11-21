@@ -39,9 +39,9 @@ if end_date >= start_date:
         total_months = total_days / 30.44  # Average month length
 
         # Display the results
-        st.write(f"Start Date: {start_date}")
-        st.write(f"End Date: {end_date}")
-        st.write(f"Include Start and End Date: **{'Yes' if include_dates else 'No'}**")
+        # st.write(f"Start Date: {start_date}")
+        # st.write(f"End Date: {end_date}")
+        # st.write(f"Include Start and End Date: **{'Yes' if include_dates else 'No'}**")
         st.write(f"Number of years (up to 1 decimal place): **{total_years:.1f}**")
         st.write(f"Number of months (up to 1 decimal place): **{total_months:.1f}**")
         st.write(f"Number of days: **{total_days}**")
