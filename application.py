@@ -68,27 +68,27 @@ else:
 
 
 # Footer Section: Lunch Countdown
-st.markdown("---")
-st.header("🍴 Countdown to Lunch")
+# st.markdown("---")
+# st.header("🍴 Countdown to Lunch")
 
-# Get current time in Los Angeles
-la_tz = pytz.timezone("America/Los_Angeles")
-now = datetime.now(la_tz)
-lunch_time = now.replace(hour=12, minute=0, second=0, microsecond=0)
+# # Get current time in Los Angeles
+# la_tz = pytz.timezone("America/Los_Angeles")
+# now = datetime.now(la_tz)
+# lunch_time = now.replace(hour=12, minute=0, second=0, microsecond=0)
 
-# If lunch time has passed today, calculate for tomorrow
-if now > lunch_time:
-    lunch_time += timedelta(days=1)
+# # If lunch time has passed today, calculate for tomorrow
+# if now > lunch_time:
+#     lunch_time += timedelta(days=1)
 
-time_remaining = lunch_time - now
-hours, remainder = divmod(time_remaining.seconds, 3600)
-minutes, seconds = divmod(remainder, 60)
+# time_remaining = lunch_time - now
+# hours, remainder = divmod(time_remaining.seconds, 3600)
+# minutes, seconds = divmod(remainder, 60)
 
-# Display time remaining
-st.write(
-    f"Time left until lunch at 12:00 PM (Los Angeles Time): **{hours} hours, {minutes} minutes, {seconds} seconds**"
-)
+# # Display time remaining
+# st.write(
+#     f"Time left until lunch at 12:00 PM (Los Angeles Time): **{hours} hours, {minutes} minutes, {seconds} seconds**"
+# )
 
-# Auto-refresh for live countdown
-time.sleep(1)  # Pause for 1 second
-st.experimental_rerun()  # Rerun the app to update the countdown
+# # Auto-refresh for live countdown
+# time.sleep(1)  # Pause for 1 second
+# st.experimental_rerun()  # Rerun the app to update the countdown
