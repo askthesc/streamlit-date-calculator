@@ -4,13 +4,15 @@ import pandas as pd
 from pandas.tseries.offsets import BDay
 import pytz
 import time
+from streamlit_autorefresh import st_autorefresh
+
 
 # Title
 st.title("📅 Date Difference Calculator")
 
 # Sidebar for Inputs
 st.sidebar.header("Input Dates")
-start_date = st.sidebar.date_input("Start Date", datetime(2022, 1, 1))
+start_date = st.sidebar.date_input("Start Date", datetime(2024, 11, 20))
 end_date = st.sidebar.date_input("End Date", datetime.today())
 
 # Sidebar for Options
@@ -28,7 +30,13 @@ if end_date >= start_date:
 
         # Adjust for inclusivity
         if not include_dates:
-            date_range = date_range[1:-1]  # Exclude start and end dates
+            if len(date_range) > 1:
+                date_range = date_range[1:-1]
+            elif len(date_range) == 1:
+                date_range = date_range
+            elif len(date_range) == 1:
+                date_range = []  # Exclude start and end dates
+      
 
         total_business_days = len(date_range)
         total_biz_years = total_business_days / 365.25
@@ -47,8 +55,10 @@ if end_date >= start_date:
         total_days = (end_date - start_date).days
         if include_dates:
             total_days += 1
+        elif total_days >0:
+            pass
         else:
-            total_days -= 1
+            total_days = 0 
 
         # Calculate years and months
         total_years = total_days / 365.25
@@ -67,28 +77,28 @@ else:
     st.error("End Date must be after Start Date.")
 
 
+# Auto-refresh every second
+st_autorefresh(interval=1000)  # Refresh every 1000ms (1 second)
+
+
 # Footer Section: Lunch Countdown
-# st.markdown("---")
-# st.header("🍴 Countdown to Lunch")
+st.markdown("---")
+st.header("🍴 Countdown to Lunch")
 
-# # Get current time in Los Angeles
-# la_tz = pytz.timezone("America/Los_Angeles")
-# now = datetime.now(la_tz)
-# lunch_time = now.replace(hour=12, minute=0, second=0, microsecond=0)
+# Get current time in Los Angeles
+la_tz = pytz.timezone("America/Los_Angeles")
+now = datetime.now(la_tz)
+lunch_time = now.replace(hour=12, minute=0, second=0, microsecond=0)
 
-# # If lunch time has passed today, calculate for tomorrow
-# if now > lunch_time:
-#     lunch_time += timedelta(days=1)
+# If lunch time has passed today, calculate for tomorrow
+if now > lunch_time:
+    lunch_time += timedelta(days=1)
 
-# time_remaining = lunch_time - now
-# hours, remainder = divmod(time_remaining.seconds, 3600)
-# minutes, seconds = divmod(remainder, 60)
+time_remaining = lunch_time - now
+hours, remainder = divmod(time_remaining.seconds, 3600)
+minutes, seconds = divmod(remainder, 60)
 
-# # Display time remaining
-# st.write(
-#     f"Time left until lunch at 12:00 PM (Los Angeles Time): **{hours} hours, {minutes} minutes, {seconds} seconds**"
-# )
-
-# # Auto-refresh for live countdown
-# time.sleep(1)  # Pause for 1 second
-# st.experimental_rerun()  # Rerun the app to update the countdown
+# Display time remaining
+st.write(
+    f"Time left until lunch at 12:00 PM (Los Angeles Time): **{hours} hours, {minutes} minutes, {seconds} seconds**"
+)
