@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from pandas.tseries.offsets import BDay
 import pytz
+import time
 
 # Title
 st.title("📅 Date Difference Calculator")
@@ -87,3 +88,7 @@ minutes, seconds = divmod(remainder, 60)
 st.write(
     f"Time left until lunch at 12:00 PM (Los Angeles Time): **{hours} hours, {minutes} minutes, {seconds} seconds**"
 )
+
+# Auto-refresh for live countdown
+time.sleep(1)  # Pause for 1 second
+st.experimental_rerun()  # Rerun the app to update the countdown
