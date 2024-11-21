@@ -28,11 +28,16 @@ if end_date >= start_date:
             date_range = date_range[1:-1]
 
         total_business_days = len(date_range)
+        total_biz_years = total_business_days / 365.25  # Account for leap years
+        total_biz_months = total_business_days / 30.44  # Average month length
 
         # Display results for business days
         st.write(f"Start Date: {start_date}")
         st.write(f"End Date: {end_date}")
         st.write(f"Include Start and End Date: **{'Yes' if include_dates else 'No'}**")
+
+        st.write(f"Number of years (up to 1 decimal place): **{total_biz_years:.1f}**")
+        st.write(f"Number of months (up to 1 decimal place): **{total_biz_months:.1f}**")
         st.write(f"Business Days (excluding weekends): **{total_business_days}**")
     else:
         # Calculate total days difference
